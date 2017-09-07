@@ -8,3 +8,4 @@
 ## git --hard HEAD^^
 ## git --hard HEAD 6d2007
 ## git reflog
+## git diff HEAD -- readme.txt #查看工作区文件变化
