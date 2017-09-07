@@ -24,3 +24,13 @@ git add * && git commit -m "comm banch dev"
 git checkout master
 git merge dev
 git branch -d dev
+
+git fetch origin master
+git log -p master ..orgin/master
+git merge origin/master
+
+git pull
+
+### ×Ô¶¨ÒåÃüÁî
+
+$ git config --global alias.st status
