@@ -18,3 +18,9 @@ git checkeout -b 'dev'
 
 $ git branch dev
 $ git checkout dev
+
+git add * && git commit -m "comm banch dev"
+
+git checkout master
+git merge dev
+git branch -d dev

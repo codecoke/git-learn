@@ -13,3 +13,4 @@
 git diff 是工作区和暂存区的对比
 git diff -- cached 是暂存区和分支的对比
 git diff HEAD -- readme.txt  工作区和分支的对比
+Creating a new branch is quick & simple.
