@@ -1,0 +1,178 @@
+typeof 123; // 'number'
+typeof NaN; // 'number'
+typeof 'str'; // 'string'
+typeof true; // 'boolean'
+typeof undefined; // 'undefined'
+typeof Math.abs; // 'function'
+typeof null; // 'object'
+typeof []; // 'object'
+typeof {}; // 'object'
+
+
+var now = new Date();
+now; // Wed Jun 24 2015 19:49:22 GMT+0800 (CST)
+now.getFullYear(); // 2015, 年份
+now.getMonth(); // 5, 月份，注意月份范围是0~11，5表示六月
+now.getDate(); // 24, 表示24号
+now.getDay(); // 3, 表示星期三
+now.getHours(); // 19, 24小时制
+now.getMinutes(); // 49, 分钟
+now.getSeconds(); // 22, 秒
+now.getMilliseconds(); // 875, 毫秒数
+now.getTime(); // 1435146562875, 以number形式表示的时间戳
+
+var d = Date.parse('2015-06-24T19:49:22.875+08:00');
+d; // 1435146562875
+
+var d = new Date(1435146562875);
+d; // Wed Jun 24 2015 19:49:22 GMT+0800 (CST)
+
+var d = new Date(1435146562875);
+d.toLocaleString(); // '2015/6/24 下午7:49:22'，本地时间（北京时区+8:00），显示的字符串与操作系统设定的格式有关
+d.toUTCString(); // 'Wed, 24 Jun 2015 11:49:22 GMT'，UTC时间，与本地时间相差8小时
+
+
+if (Date.now) {
+    alert(Date.now()); // 老版本IE没有now()方法
+} else {
+    alert(new Date().getTime());
+
+
+
+进阶
+
+要做更精确地匹配，可以用[]表示范围，比如：
+
+[0-9a-zA-Z\_]可以匹配一个数字、字母或者下划线；
+
+[0-9a-zA-Z\_]+可以匹配至少由一个数字、字母或者下划线组成的字符串，比如'a100'，'0_Z'，'js2015'等等；
+
+[a-zA-Z\_\$][0-9a-zA-Z\_\$]*可以匹配由字母或下划线、$开头，后接任意个由一个数字、字母或者下划线、$组成的字符串，也就是JavaScript允许的变量名；
+
+[a-zA-Z\_\$][0-9a-zA-Z\_\$]{0, 19}更精确地限制了变量的长度是1-20个字符（前面1个字符+后面最多19个字符）。
+
+A|B可以匹配A或B，所以(J|j)ava(S|s)cript可以匹配'JavaScript'、'Javascript'、'javaScript'或者'javascript'。
+
+^表示行的开头，^\d表示必须以数字开头。
+
+$表示行的结束，\d$表示必须以数字结束。
+
+你可能注意到了，js也可以匹配'jsp'，但是加上^js$就变成了整行匹配，就只能匹配'js'了。
+
+
+
+function inherits(Child, Parent) {
+    var F = function () {};
+    F.prototype = Parent.prototype;
+    Child.prototype = new F();
+    Child.prototype.constructor = Child;
+}
+
+
+function Student(props) {
+    this.name = props.name || 'Unnamed';
+}
+
+Student.prototype.hello = function () {
+    alert('Hello, ' + this.name + '!');
+}
+
+function PrimaryStudent(props) {
+    Student.call(this, props);
+    this.grade = props.grade || 1;
+}
+
+// 实现原型继承链:
+inherits(PrimaryStudent, Student);
+
+// 绑定其他方法到PrimaryStudent原型:
+PrimaryStudent.prototype.getGrade = function () {
+    return this.grade;
+};
+}
+
+
+### 浏览器
+
+location.protocol; // 'http'
+location.host; // 'www.example.com'
+location.port; // '8080'
+location.pathname; // '/path/index.html'
+location.search; // '?a=1&b=2'
+location.hash; // 'TOP'
+
+
+// 通过querySelector获取ID为q1的节点：
+var q1 = document.querySelector('#q1');
+
+// 通过querySelectorAll获取q1节点内的符合条件的所有节点：
+var ps = q1.querySelectorAll('div.highlighted > p');
+
+
+
+
+HTML5新增了大量标准控件，常用的包括date、datetime、datetime-local、color等，它们都使用<input>标签：
+
+<input type="date" value="2015-07-01">
+
+2014/08/02
+ <input type="datetime-local" value="2015-07-01T02:03:04">
+
+2015/07/01 02:03:04
+ <input type="color" value="#ff0000">
+
+
+
+var
+    fileInput = document.getElementById('test-image-file'),
+    info = document.getElementById('test-file-info'),
+    preview = document.getElementById('test-image-preview');
+// 监听change事件:
+fileInput.addEventListener('change', function () {
+    // 清除背景图片:
+    preview.style.backgroundImage = '';
+    // 检查文件是否选择:
+    if (!fileInput.value) {
+        info.innerHTML = '没有选择文件';
+        return;
+    }
+    // 获取File引用:
+    var file = fileInput.files[0];
+    // 获取File信息:
+    info.innerHTML = '文件: ' + file.name + '<br>' +
+                     '大小: ' + file.size + '<br>' +
+                     '修改: ' + file.lastModifiedDate;
+    if (file.type !== 'image/jpeg' && file.type !== 'image/png' && file.type !== 'image/gif') {
+        alert('不是有效的图片文件!');
+        return;
+    }
+    // 读取文件:
+    var reader = new FileReader();
+    reader.onload = function(e) {
+        var
+            data = e.target.result; // 'data:image/jpeg;base64,/9j/4AAQSk...(base64编码)...'            
+        preview.style.backgroundImage = 'url(' + data + ')';
+    };
+    // 以DataURL的形式读取文件:
+    reader.readAsDataURL(file);
+});
+
+
+
+对于PUT、DELETE以及其他类型如application/json的POST请求，在发送AJAX请求之前，浏览器会先发送一个OPTIONS请求（称为preflighted请求）到这个URL上，询问目标服务器是否接受：
+
+OPTIONS /path/to/resource HTTP/1.1
+Host: bar.com
+Origin: http://my.com
+Access-Control-Request-Method: POST
+服务器必须响应并明确指出允许的Method：
+
+HTTP/1.1 200 OK
+Access-Control-Allow-Origin: http://my.com
+Access-Control-Allow-Methods: POST, GET, PUT, OPTIONS
+Access-Control-Max-Age: 86400
+浏览器确认服务器响应的Access-Control-Allow-Methods头确实包含将要发送的AJAX请求的Method，才会继续发送AJAX，否则，抛出一个错误。
+
+由于以POST、PUT方式传送JSON格式的数据在REST中很常见，所以要跨域正确处理POST和PUT请求，服务器端必须正确响应OPTIONS请求。
+
+underscore

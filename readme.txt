@@ -124,3 +124,4 @@ git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Crese
 ### 中文文件名乱码
 
 $git config –global core.quotepath false
+git config core.autocrlf false
