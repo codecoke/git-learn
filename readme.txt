@@ -114,3 +114,13 @@ doc/*.txt  # 会忽略 doc/notes.txt 但不包括 doc/server/arch.txt
 git rm -r --cached .
 git add .
 git commit -m 'update .gitignore'
+
+### 自定义命令
+git config --global alias.st status
+git config --global unset alias.st
+
+git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+
+### 中文文件名乱码
+
+$git config –global core.quotepath false
