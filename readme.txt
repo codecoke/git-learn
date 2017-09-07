@@ -28,5 +28,10 @@ Git鼓励大量使用分支：
 合并某分支到当前分支：git merge <name>
 
 删除分支：git branch -d <name>
+
+### 查看分支
+
+$ git log --graph --pretty=oneline --abbrev-commit
+
 Creating a new branch is quick AND simple.
 
